@@ -8,7 +8,7 @@ Backend project:
 ## Endpoints
 * `starlink-imagine-api.herokuapp.com/satellite/all` : returns all available satellite data
 * `starlink-imagine-api.herokuapp.com/satellite?name=<choose a name>&limit=<choose how many results>`: search satellites by name. The limit field is optional
-* `starlink-imagine-api.herokuapp.com/satellite/whithin?l1=<latitude>&l2=<longitude>&d=<distance in kilometers>`: returns all satellites that are within a maximum distance d from (l1, l2)
+* `starlink-imagine-api.herokuapp.com/satellite/within?l1=<latitude>&l2=<longitude>&d=<distance in kilometers>`: returns all satellites that are within a maximum distance d from (l1, l2)
 
 ## Test locally
 This repository was developed with NodeJs v17.4.0 --- So keep that in mind if you have a different version.
