@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Satellite from '../models/satellite.js';
+
 const STARLINK_URL = 'https://api.spacexdata.com/v4/starlink';
+
 export const refreshStarlink = async () =>{
   console.log('Refreshing database');
   const {data} = await axios.get(STARLINK_URL);

@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import idPlugin from 'mongoose-id';
-import mongooseHidden from 'mongoose-hidden';
 
 
 const satelliteSchema = mongoose.Schema({
@@ -31,6 +30,7 @@ const satelliteSchema = mongoose.Schema({
   'location': {
     'type': {'type': 'String', 'default': 'Point'},
     'coordinates': {'type': [Number], 'default': [0, 0]},
+    'select': false,
   },
   'spaceTrack': {
     'CCSDS_OMM_VERS': {
@@ -202,7 +202,6 @@ const satelliteSchema = mongoose.Schema({
 
 
 satelliteSchema.plugin(idPlugin);
-satelliteSchema.plugin(mongooseHidden);
 satelliteSchema.index({'location': '2dsphere'});
 
 const Satellite = mongoose.model('Satellite', satelliteSchema);

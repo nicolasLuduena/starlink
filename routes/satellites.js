@@ -1,6 +1,6 @@
 import express from 'express';
 import {
-  getSatellites, updateSatellites, getSatellite, getSatellitesWithin,
+  getSatellites, getSatellite, getSatellitesWithin,
 } from '../controllers/satellites.js';
 
 import {query} from 'express-validator';

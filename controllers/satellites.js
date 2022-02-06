@@ -22,6 +22,7 @@ export const getSatellite = async (req, res) => {
     const nameRegex = escapedName +'.*';
     const satellites = await Satellite
         .find({'spaceTrack.OBJECT_NAME': {$regex: nameRegex, $options: 'i'}})
+        .select('-location')
         .limit(limit);
     return res.status(StatusCodes.OK).json(satellites);
   } catch (error) {
@@ -31,7 +32,7 @@ export const getSatellite = async (req, res) => {
 
 export const getSatellites = async (req, res) => {
   try {
-    const satellites = await Satellite.find();
+    const satellites = await Satellite.find().select('-location');
     return res.status(StatusCodes.OK).json(satellites);
   } catch (error) {
     return res.status(StatusCodes.NOT_FOUND)
@@ -78,6 +79,6 @@ export const getSatellitesWithin = async (req, res) =>{
         'longitude': {$ne: null},
         'latitude': {$ne: null},
       },
-  );
+  ).select('-location');
   return res.status(StatusCodes.OK).json(a);
 };
