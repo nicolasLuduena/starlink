@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import satelliteRoutes from './routes/satellites.js';
+import {addScheduledJobs} from './schedules/schedules.js';
+import {ToadScheduler} from 'toad-scheduler';
 
 
 const app = express();
@@ -18,6 +20,10 @@ app.use('/satellite', satelliteRoutes);
 
 const CONNECTION_URL = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
+
+
+const scheduler = new ToadScheduler();
+addScheduledJobs(scheduler);
 
 mongoose.connect(
     CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})

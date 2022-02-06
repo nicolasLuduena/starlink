@@ -6,6 +6,7 @@ import {
 import {validationResult} from 'express-validator';
 
 import axios from 'axios';
+import {refreshStarlink} from './utils.js';
 
 const STARLINK_URL = 'https://api.spacexdata.com/v4/starlink';
 
@@ -43,37 +44,13 @@ export const getSatellites = async (req, res) => {
 
 export const updateSatellites = async (req, res) => {
   try {
-    const {data} = await axios.get(STARLINK_URL);
-    data.forEach((sat) =>{
-      sat.location = {
-        type: 'Point', coordinates: [sat.longitude || 0, sat.latitude || 0],
-      };
-      sat._id = sat.id;
-      delete sat.id;
-    });
-    Satellite.deleteMany()
-        .then(()=>{})
-        .catch((error)=>{
-          console.log(`ERROR DELETING DATA ${error}`);
-          res.status(StatusCodes.BAD_REQUEST)
-              .json({message: error.text});
-        });
-    console.log(data);
-    Satellite.insertMany(data)
-        .then(()=>{
-          console.log(`INSERTED ${data.length} satellites`);
-          res.status(StatusCodes.OK)
-              .send({message: 'Successfully refreshed data'});
-        })
-        .catch((error)=>{
-          console.log(`ERROR INSERTING DATA ${error}`);
-          res.status(StatusCodes.BAD_REQUEST)
-              .json({message: error.text});
-        });
+    refreshStarlink();
+    res.status(StatusCodes.OK)
+        .send({message: 'Successfully refreshed data'});
   } catch (error) {
     console.log(error);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({message: `ERROR ON SPACE X REQUEST`});
+        .json({message: ReasonPhrases.INTERNAL_SERVER_ERROR});
   };
 };
 
