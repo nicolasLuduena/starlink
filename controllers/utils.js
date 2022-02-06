@@ -1,4 +1,8 @@
+import axios from 'axios';
+import Satellite from '../models/satellite.js';
+const STARLINK_URL = 'https://api.spacexdata.com/v4/starlink';
 export const refreshStarlink = async () =>{
+  console.log('Refreshing database');
   const {data} = await axios.get(STARLINK_URL);
   data.forEach((sat) =>{
     sat.location = {
@@ -7,8 +11,7 @@ export const refreshStarlink = async () =>{
     sat._id = sat.id;
     delete sat.id;
   });
-  Satellite.deleteMany();
-  console.log(data.length);
-  Satellite.insertMany(data);
-  console.log(`INSERTED ${data.length} satellites`);
+  console.log(await Satellite.deleteMany());
+  console.log(await Satellite.insertMany(data));
+  console.log('Database refreshed');
 };

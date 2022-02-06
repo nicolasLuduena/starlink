@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import satelliteRoutes from './routes/satellites.js';
 import {addScheduledJobs} from './schedules/schedules.js';
 import {ToadScheduler} from 'toad-scheduler';
+import {refreshStarlink} from './controllers/utils.js';
 
 
 const app = express();
@@ -24,6 +25,7 @@ const PORT = process.env.PORT || 5000;
 
 const scheduler = new ToadScheduler();
 addScheduledJobs(scheduler);
+refreshStarlink();
 
 mongoose.connect(
     CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})

@@ -15,7 +15,7 @@ router.get(
     getSatellite,
 );
 router.get('/all', getSatellites);
-// could develop auth for the next endpoint
+// could develop auth
 // router.post('/refresh', updateSatellites);
 router.get(
     '/within',

@@ -5,10 +5,8 @@ import {
 } from 'http-status-codes';
 import {validationResult} from 'express-validator';
 
-import axios from 'axios';
 import {refreshStarlink} from './utils.js';
 
-const STARLINK_URL = 'https://api.spacexdata.com/v4/starlink';
 
 export const getSatellite = async (req, res) => {
   const errors = validationResult(req);

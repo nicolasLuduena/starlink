@@ -6,5 +6,5 @@ const refreshDbTask = new AsyncTask(
     'simple task',
     refreshStarlink,
 );
-export const refreshDbJob = new SimpleIntervalJob({minutes: 1}, refreshDbTask);
+export const refreshDbJob = new SimpleIntervalJob({hours: 1}, refreshDbTask);
 
