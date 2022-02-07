@@ -6,7 +6,7 @@ Backend project:
 * Bonus: create an API that takes as input parameters a (latitude l1, longitude l2, distance d) and returns all satellites that are within a maximum distance d from (l1, l2)
 
 ## Endpoints
-* `starlink-imagine-api.herokuapp.com/satellite/all` : returns all available satellite data (might return empty if an automatic refresh is being executed)
+* `starlink-imagine-api.herokuapp.com/satellite/all` : returns all available satellite data (might return empty if an automatic refresh is being executed --> This could be corrected doing individual updates on an authenticated endpoint through MongoDB's `findAndUpdate` method, instead of just deleting everything and creating it again).
 * `starlink-imagine-api.herokuapp.com/satellite?name=<choose a name>&limit=<choose how many results>`: search satellites by name. The limit field is optional
 * `starlink-imagine-api.herokuapp.com/satellite/within?l1=<latitude>&l2=<longitude>&d=<distance in kilometers>`: returns all satellites that are within a maximum distance d from (l1, l2)
 
